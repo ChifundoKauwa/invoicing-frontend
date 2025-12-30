@@ -134,7 +134,10 @@ class ApiClient {
 }
 
 // Singleton instance
-const apiClient = new ApiClient(process.env.NEXT_PUBLIC_API_URL || '');
+// Default to deployed backend with global /api prefix; allow override via NEXT_PUBLIC_API_URL for flexibility.
+const apiClient = new ApiClient(
+  process.env.NEXT_PUBLIC_API_URL || 'https://invoicesystembackend-1.onrender.com/api'
+);
 
 export default apiClient;
 export type { ApiError };
