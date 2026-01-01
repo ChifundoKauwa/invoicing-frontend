@@ -3,9 +3,11 @@
 export interface User {
   id: string;
   email: string;
-  name: string;
-  created_at: string;
-  updated_at: string;
+  name?: string;
+  role: 'user' | 'manager' | 'admin';
+  createdAt?: string;
+  created_at?: string;
+  updated_at?: string;
 }
 
 export interface LoginRequest {
@@ -14,19 +16,18 @@ export interface LoginRequest {
 }
 
 export interface LoginResponse {
-  access_token: string;
-  token_type: string;
+  accessToken: string;
   user: User;
 }
 
 export interface RegisterRequest {
   email: string;
   password: string;
-  name: string;
+  role?: 'user' | 'manager' | 'admin';
 }
 
 export interface RegisterResponse {
-  access_token: string;
+  accessToken: string;
   token_type: string;
   user: User;
 }
