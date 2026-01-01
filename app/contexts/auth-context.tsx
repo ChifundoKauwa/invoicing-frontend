@@ -50,17 +50,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       skipAuth: true,
     });
 
-    apiClient.setToken(response.access_token);
+    apiClient.setToken(response.accessToken);
     setUser(response.user);
   };
 
   const register = async (data: RegisterRequest): Promise<void> => {
-    const response = await apiClient.post<RegisterResponse>('/auth/register', data, {
+    await apiClient.post<RegisterResponse>('/auth/register', data, {
       skipAuth: true,
     });
-
-    apiClient.setToken(response.access_token);
-    setUser(response.user);
   };
 
   const logout = (): void => {

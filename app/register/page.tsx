@@ -50,8 +50,8 @@ export default function RegisterPage() {
     setIsLoading(true);
 
     try {
-      await register({ name, email, password });
-      router.push('/dashboard');
+      await register({ email, password });
+      router.push('/login');
     } catch (err) {
       const apiError = err as ApiError;
       setError(apiError.message || 'Registration failed. Please try again.');
@@ -87,7 +87,7 @@ export default function RegisterPage() {
                 onChange={(e) => setName(e.target.value)}
                 required
                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-black"
-                placeholder="John Doe"
+                placeholder="type your name"
                 disabled={isLoading}
               />
               {fieldErrors.name && (
