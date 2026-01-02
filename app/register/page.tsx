@@ -51,8 +51,8 @@ export default function RegisterPage() {
     setIsLoading(true);
 
     try {
-      await register({ email, password });
-      router.push('/login');
+      await register({ firstname, lastname, email, password });
+      router.push('/dashboard');
     } catch (err) {
       const apiError = err as ApiError;
       setError(apiError.message || 'Registration failed. Please try again.');
