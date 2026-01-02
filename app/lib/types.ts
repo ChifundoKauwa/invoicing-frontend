@@ -5,9 +5,9 @@ export interface User {
   email: string;
   name?: string;
   role: 'user' | 'manager' | 'admin';
-  createdAt?: string;
-  created_at?: string;
-  updated_at?: string;
+  createdAt: string;
+  created_at: string;
+  updated_at: string;
 }
 
 export interface LoginRequest {
