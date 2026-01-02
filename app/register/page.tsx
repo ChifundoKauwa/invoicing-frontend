@@ -17,7 +17,8 @@ export default function RegisterPage() {
   const router = useRouter();
   const { register, isAuthenticated } = useAuth();
   
-  const [name, setName] = useState('');
+  const [firstname, setFirstname] = useState('');
+  const [lastname,setLastname]= useState('')
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -77,21 +78,39 @@ export default function RegisterPage() {
 
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
-                Full Name
+              <label htmlFor="firstname" className="block text-sm font-medium text-gray-700 mb-1">
+                First Name
               </label>
               <input
-                id="name"
+                id="firstname"
                 type="text"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
+                value={firstname}
+                onChange={(e) => setFirstname(e.target.value)}
                 required
                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-black"
-                placeholder="type your name"
+                placeholder="type your first name"
                 disabled={isLoading}
               />
-              {fieldErrors.name && (
-                <p className="mt-1 text-sm text-red-600">{fieldErrors.name[0]}</p>
+              {fieldErrors.firstname && (
+                <p className="mt-1 text-sm text-red-600">{fieldErrors.firstname[0]}</p>
+              )}
+            </div>
+              <div>
+              <label htmlFor="lastname" className="block text-sm font-medium text-gray-700 mb-1">
+                LastName
+              </label>
+              <input
+                id="lastname"
+                type="text"
+                value={lastname}
+                onChange={(e) => setLastname(e.target.value)}
+                required
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-black"
+                placeholder="type your last name"
+                disabled={isLoading}
+              />
+              {fieldErrors.lastname && (
+                <p className="mt-1 text-sm text-red-600">{fieldErrors.lastname[0]}</p>
               )}
             </div>
 
