@@ -55,9 +55,15 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   };
 
   const register = async (data: RegisterRequest): Promise<void> => {
-    await apiClient.post<RegisterResponse>('/auth/register', data, {
+    const response = await apiClient.post<RegisterResponse>('/auth/register', data, {
       skipAuth: true,
     });
+    
+    // After successful registration, set token and user
+    if (response.accessToken) {
+      apiClient.setToken(response.accessToken);
+      setUser(response.user);
+    }
   };
 
   const logout = (): void => {
