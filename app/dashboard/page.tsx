@@ -268,7 +268,7 @@ export default function DashboardPage() {
                     <span className="text-xs font-semibold text-white">{statusCounts.draft}</span>
                   </div>
                   <div className="flex flex-col items-center flex-1">
-                    <div className="w-full bg-blue-500 rounded-t-lg transition-all hover:bg-blue-400" style={{height: `${(statusCounts.sent / Math.max(...Object.values(statusCounts), 1)) * 100}%`, minHeight: '20px'}}></div>
+                    <div className="w-full bg-sky-500 rounded-t-lg transition-all hover:bg-sky-400" style={{height: `${(statusCounts.sent / Math.max(...Object.values(statusCounts), 1)) * 100}%`, minHeight: '20px'}}></div>
                     <span className="text-xs text-gray-400 mt-2">Sent</span>
                     <span className="text-xs font-semibold text-white">{statusCounts.sent}</span>
                   </div>
