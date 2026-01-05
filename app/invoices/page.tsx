@@ -3,7 +3,7 @@
 /**
  * Invoices Page
  * 
- * Protected route - displays all user invoices with filtering and actions.
+ * Protected route - displays all user invoices with modern gradient design.
  */
 
 import { useState, useEffect } from 'react';
@@ -78,14 +78,17 @@ export default function InvoicesPage() {
   return (
     <ProtectedRoute>
       <div className="min-h-screen bg-gray-50">
+        {/* Subtle gradient overlay */}
+        <div className="fixed inset-0 bg-gradient-to-br from-gray-50 via-gray-50 to-blue-950/20 pointer-events-none"></div>
+
         {/* Header */}
-        <header className="bg-white shadow-sm">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 sm:py-4">
+        <header className="relative bg-white/5 backdrop-blur-md border-b border-gray-200 shadow-lg">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-5">
             <div className="flex justify-between items-center">
               <div className="flex items-center gap-3">
                 <Link
                   href="/dashboard"
-                  className="text-gray-500 hover:text-gray-700 transition-colors"
+                  className="text-gray-400 hover:text-white transition-colors"
                 >
                   <svg
                     className="w-5 h-5 sm:w-6 sm:h-6"
@@ -101,9 +104,9 @@ export default function InvoicesPage() {
                     />
                   </svg>
                 </Link>
-                <h1 className="text-xl sm:text-2xl font-bold text-gray-900">Invoices</h1>
+                <h1 className="text-xl sm:text-3xl font-bold text-gray-900">Invoices</h1>
               </div>
-              <button className="px-3 sm:px-4 py-2 text-xs sm:text-sm bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors active:scale-95">
+              <button className="px-4 sm:px-6 py-2.5 sm:py-3 text-xs sm:text-sm font-semibold bg-blue-600 text-white rounded-full hover:bg-blue-700 shadow-lg shadow-emerald-500/30 transition-all hover:-translate-y-0.5 active:scale-95">
                 + New Invoice
               </button>
             </div>
@@ -111,56 +114,56 @@ export default function InvoicesPage() {
         </header>
 
         {/* Main Content */}
-        <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
+        <main className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
           {/* Filters */}
-          <div className="bg-white rounded-lg shadow-sm p-4 mb-6">
-            <div className="flex flex-wrap gap-2">
+          <div className="bg-white backdrop-blur-lg border border-gray-200 rounded-2xl shadow-xl p-4 sm:p-5 mb-6">
+            <div className="flex flex-wrap gap-2 sm:gap-3">
               <button
                 onClick={() => setFilter('all')}
-                className={`px-3 py-1.5 rounded-md text-sm transition-colors ${
+                className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
                   filter === 'all'
-                    ? 'bg-blue-600 text-white'
-                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                    ? 'bg-blue-600 text-white shadow-lg shadow-emerald-500/30'
+                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200 border border-gray-200'
                 }`}
               >
                 All
               </button>
               <button
                 onClick={() => setFilter('draft')}
-                className={`px-3 py-1.5 rounded-md text-sm transition-colors ${
+                className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
                   filter === 'draft'
-                    ? 'bg-blue-600 text-white'
-                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                    ? 'bg-blue-600 text-white shadow-lg shadow-emerald-500/30'
+                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200 border border-gray-200'
                 }`}
               >
                 Draft
               </button>
               <button
                 onClick={() => setFilter('sent')}
-                className={`px-3 py-1.5 rounded-md text-sm transition-colors ${
+                className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
                   filter === 'sent'
-                    ? 'bg-blue-600 text-white'
-                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                    ? 'bg-blue-600 text-white shadow-lg shadow-emerald-500/30'
+                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200 border border-gray-200'
                 }`}
               >
                 Sent
               </button>
               <button
                 onClick={() => setFilter('paid')}
-                className={`px-3 py-1.5 rounded-md text-sm transition-colors ${
+                className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
                   filter === 'paid'
-                    ? 'bg-blue-600 text-white'
-                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                    ? 'bg-blue-600 text-white shadow-lg shadow-emerald-500/30'
+                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200 border border-gray-200'
                 }`}
               >
                 Paid
               </button>
               <button
                 onClick={() => setFilter('overdue')}
-                className={`px-3 py-1.5 rounded-md text-sm transition-colors ${
+                className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
                   filter === 'overdue'
-                    ? 'bg-blue-600 text-white'
-                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                    ? 'bg-blue-600 text-white shadow-lg shadow-emerald-500/30'
+                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200 border border-gray-200'
                 }`}
               >
                 Overdue
@@ -185,28 +188,28 @@ export default function InvoicesPage() {
               onAction={filter === 'all' ? undefined : () => setFilter('all')}
             />
           ) : (
-            <div className="bg-white rounded-lg shadow-sm overflow-hidden">
+            <div className="bg-white backdrop-blur-lg border border-gray-200 rounded-2xl shadow-2xl overflow-hidden">
               {/* Desktop Table */}
               <div className="hidden md:block overflow-x-auto">
                 <table className="w-full">
                   <thead className="bg-gray-50 border-b border-gray-200">
                     <tr>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      <th className="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
                         Invoice #
                       </th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      <th className="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
                         Client
                       </th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      <th className="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
                         Amount
                       </th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      <th className="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
                         Status
                       </th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      <th className="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
                         Due Date
                       </th>
-                      <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      <th className="px-6 py-4 text-right text-xs font-semibold text-gray-600 uppercase tracking-wider">
                         Actions
                       </th>
                     </tr>
@@ -214,18 +217,18 @@ export default function InvoicesPage() {
                   <tbody className="divide-y divide-gray-200">
                     {filteredInvoices.map((invoice) => (
                       <tr key={invoice.id} className="hover:bg-gray-50 transition-colors">
-                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                        <td className="px-6 py-4 whitespace-nowrap text-sm font-semibold text-gray-900">
                           {invoice.invoice_number}
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-700">
                           {invoice.client_name}
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 font-semibold">
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 font-bold">
                           {formatCurrency(invoice.amount)}
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap">
                           <span
-                            className={`px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full ${getStatusColor(
+                            className={`px-3 py-1.5 inline-flex text-xs leading-5 font-semibold rounded-full ${getStatusColor(
                               invoice.status
                             )}`}
                           >
@@ -236,7 +239,7 @@ export default function InvoicesPage() {
                           {formatDate(invoice.due_date)}
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                          <button className="text-blue-600 hover:text-blue-900 transition-colors">
+                          <button className="px-4 py-2 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition-all hover:-translate-y-0.5 active:scale-95 shadow-lg shadow-emerald-500/30 font-medium">
                             View
                           </button>
                         </td>
@@ -249,32 +252,32 @@ export default function InvoicesPage() {
               {/* Mobile Cards */}
               <div className="md:hidden divide-y divide-gray-200">
                 {filteredInvoices.map((invoice) => (
-                  <div key={invoice.id} className="p-4 hover:bg-gray-50 transition-colors">
-                    <div className="flex justify-between items-start mb-2">
+                  <div key={invoice.id} className="p-5 hover:bg-gray-50 transition-colors">
+                    <div className="flex justify-between items-start mb-3">
                       <div>
-                        <p className="text-sm font-medium text-gray-900">
+                        <p className="text-sm font-semibold text-gray-900">
                           {invoice.invoice_number}
                         </p>
-                        <p className="text-sm text-gray-600">{invoice.client_name}</p>
+                        <p className="text-sm text-gray-600 mt-1">{invoice.client_name}</p>
                       </div>
                       <span
-                        className={`px-2 py-1 text-xs font-semibold rounded-full ${getStatusColor(
+                        className={`px-3 py-1 text-xs font-semibold rounded-full ${getStatusColor(
                           invoice.status
                         )}`}
                       >
                         {invoice.status.charAt(0).toUpperCase() + invoice.status.slice(1)}
                       </span>
                     </div>
-                    <div className="flex justify-between items-center mt-3">
+                    <div className="flex justify-between items-center mt-4">
                       <div>
                         <p className="text-lg font-bold text-gray-900">
                           {formatCurrency(invoice.amount)}
                         </p>
-                        <p className="text-xs text-gray-500">
+                        <p className="text-xs text-gray-500 mt-1">
                           Due: {formatDate(invoice.due_date)}
                         </p>
                       </div>
-                      <button className="px-3 py-1.5 text-sm text-blue-600 hover:bg-blue-50 rounded-md transition-colors">
+                      <button className="px-4 py-2 text-sm bg-blue-600 text-white rounded-full hover:bg-blue-700 transition-all hover:-translate-y-0.5 active:scale-95 shadow-lg shadow-emerald-500/30 font-medium">
                         View
                       </button>
                     </div>
