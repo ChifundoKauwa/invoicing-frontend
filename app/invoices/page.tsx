@@ -176,13 +176,13 @@ export default function InvoicesPage() {
           ) : filteredInvoices.length === 0 ? (
             <EmptyState
               title={filter === 'all' ? 'No invoices yet' : `No ${filter} invoices`}
-              description={
+              message={
                 filter === 'all'
                   ? 'Create your first invoice to get started'
                   : `You don't have any ${filter} invoices`
               }
-              actionLabel={filter === 'all' ? 'Create Invoice' : 'View All Invoices'}
-              onAction={() => filter === 'all' ? null : setFilter('all')}
+              actionLabel={filter === 'all' ? undefined : 'View All Invoices'}
+              onAction={filter === 'all' ? undefined : () => setFilter('all')}
             />
           ) : (
             <div className="bg-white rounded-lg shadow-sm overflow-hidden">
