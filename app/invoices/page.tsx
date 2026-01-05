@@ -3,7 +3,7 @@
 /**
  * Invoices Page
  * 
- * Protected route - displays all user invoices with modern gradient design.
+ * Protected route - displays all user invoices with filtering and search.
  */
 
 import { useState, useEffect } from 'react';
@@ -22,6 +22,7 @@ export default function InvoicesPage() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [filter, setFilter] = useState<'all' | 'draft' | 'sent' | 'paid' | 'overdue'>('all');
+  const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
     fetchInvoices();
@@ -41,9 +42,13 @@ export default function InvoicesPage() {
     }
   };
 
-  const filteredInvoices = filter === 'all' 
-    ? invoices 
-    : invoices.filter(inv => inv.status === filter);
+  const filteredInvoices = invoices
+    .filter(inv => filter === 'all' || inv.status === filter)
+    .filter(inv => 
+      searchTerm === '' || 
+      inv.invoice_number.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      inv.client_name.toLowerCase().includes(searchTerm.toLowerCase())
+    );
 
   const formatCurrency = (amount: number) => {
     return new Intl.NumberFormat('en-US', {
@@ -188,11 +193,11 @@ export default function InvoicesPage() {
               onAction={filter === 'all' ? undefined : () => setFilter('all')}
             />
           ) : (
-            <div className="bg-white backdrop-blur-lg border border-gray-200 rounded-2xl shadow-2xl overflow-hidden">
+            <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
               {/* Desktop Table */}
               <div className="hidden md:block overflow-x-auto">
                 <table className="w-full">
-                  <thead className="bg-gray-50 border-b border-gray-200">
+                  <thead className="bg-gray-50 border-b border-gray-100">
                     <tr>
                       <th className="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
                         Invoice #
@@ -201,27 +206,33 @@ export default function InvoicesPage() {
                         Client
                       </th>
                       <th className="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                        Issue Date
+                      </th>
+                      <th className="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                        Due Date
+                      </th>
+                      <th className="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
                         Amount
                       </th>
                       <th className="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
                         Status
                       </th>
-                      <th className="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                        Due Date
-                      </th>
-                      <th className="px-6 py-4 text-right text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                        Actions
-                      </th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-gray-200">
+                  <tbody className="divide-y divide-gray-100">
                     {filteredInvoices.map((invoice) => (
-                      <tr key={invoice.id} className="hover:bg-gray-50 transition-colors">
+                      <tr key={invoice.id} className="hover:bg-gray-50 transition-colors cursor-pointer">
                         <td className="px-6 py-4 whitespace-nowrap text-sm font-semibold text-gray-900">
                           {invoice.invoice_number}
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-700">
                           {invoice.client_name}
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
+                          {formatDate(invoice.issue_date)}
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
+                          {formatDate(invoice.due_date)}
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 font-bold">
                           {formatCurrency(invoice.amount)}
@@ -235,14 +246,6 @@ export default function InvoicesPage() {
                             {invoice.status.charAt(0).toUpperCase() + invoice.status.slice(1)}
                           </span>
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-700">
-                          {formatDate(invoice.due_date)}
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                          <button className="px-4 py-2 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition-all hover:-translate-y-0.5 active:scale-95 shadow-lg shadow-emerald-500/30 font-medium">
-                            View
-                          </button>
-                        </td>
                       </tr>
                     ))}
                   </tbody>
@@ -250,7 +253,7 @@ export default function InvoicesPage() {
               </div>
 
               {/* Mobile Cards */}
-              <div className="md:hidden divide-y divide-gray-200">
+              <div className="md:hidden divide-y divide-gray-100">
                 {filteredInvoices.map((invoice) => (
                   <div key={invoice.id} className="p-5 hover:bg-gray-50 transition-colors">
                     <div className="flex justify-between items-start mb-3">
@@ -277,9 +280,6 @@ export default function InvoicesPage() {
                           Due: {formatDate(invoice.due_date)}
                         </p>
                       </div>
-                      <button className="px-4 py-2 text-sm bg-blue-600 text-white rounded-full hover:bg-blue-700 transition-all hover:-translate-y-0.5 active:scale-95 shadow-lg shadow-emerald-500/30 font-medium">
-                        View
-                      </button>
                     </div>
                   </div>
                 ))}
