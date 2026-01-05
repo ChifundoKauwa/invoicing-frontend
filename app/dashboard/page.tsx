@@ -287,8 +287,8 @@ export default function DashboardPage() {
             </div>
 
             {/* Recent Invoices Table */}
-            <div className="bg-gray-800/50 backdrop-blur-xl rounded-2xl shadow-xl border border-gray-700/50 overflow-hidden">
-              <div className="px-6 py-4 border-b border-gray-700/50 flex justify-between items-center">
+            <div className="rounded-2xl shadow-2xl border-2 border-green-500/30 overflow-hidden backdrop-blur-sm">
+              <div className="px-6 py-4 border-b border-green-500/20 flex justify-between items-center">
                 <div>
                   <h3 className="text-lg font-semibold text-white">Recent Invoices</h3>
                   <p className="text-sm text-gray-400">Latest invoice activities</p>
@@ -299,7 +299,7 @@ export default function DashboardPage() {
               </div>
               <div className="overflow-x-auto">
                 <table className="w-full">
-                  <thead className="bg-gray-900/50 border-b border-gray-700/50">
+                  <thead className="border-b border-green-500/20">
                     <tr>
                       <th className="px-6 py-3 text-left text-xs font-semibold text-gray-400 uppercase">Invoice#</th>
                       <th className="px-6 py-3 text-left text-xs font-semibold text-gray-400 uppercase">Client</th>
@@ -309,7 +309,7 @@ export default function DashboardPage() {
                       <th className="px-6 py-3 text-left text-xs font-semibold text-gray-400 uppercase">Status</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-gray-700/50">
+                  <tbody className="divide-y divide-green-500/10">
                     {isLoading ? (
                       <tr>
                         <td colSpan={6} className="px-6 py-8 text-center text-gray-400">Loading invoices...</td>
