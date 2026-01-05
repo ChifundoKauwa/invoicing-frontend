@@ -23,11 +23,11 @@ export default function DashboardPage() {
       <div className="min-h-screen bg-gray-50">
         {/* Header */}
         <header className="bg-white shadow-sm">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
-            <h1 className="text-2xl font-bold text-gray-900">Dashboard</h1>
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 sm:py-4 flex justify-between items-center">
+            <h1 className="text-xl sm:text-2xl font-bold text-gray-900">Dashboard</h1>
             <button
               onClick={handleLogout}
-              className="px-4 py-2 text-sm text-gray-700 hover:text-gray-900 hover:bg-gray-100 rounded-md transition-colors"
+              className="px-3 sm:px-4 py-2 text-xs sm:text-sm text-gray-700 hover:text-gray-900 hover:bg-gray-100 rounded-md transition-colors active:scale-95"
             >
               Sign Out
             </button>
@@ -35,25 +35,25 @@ export default function DashboardPage() {
         </header>
 
         {/* Main Content */}
-        <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
           {/* Welcome Section */}
-          <div className="bg-white rounded-lg shadow-md p-6 mb-6">
-            <h2 className="text-xl font-semibold text-gray-900 mb-2">
+          <div className="bg-white rounded-lg shadow-md p-4 sm:p-6 mb-4 sm:mb-6">
+            <h2 className="text-lg sm:text-xl font-semibold text-gray-900 mb-2">
               Welcome back, {user?.name}!
             </h2>
-            <p className="text-gray-600">{user?.email}</p>
+            <p className="text-sm sm:text-base text-gray-600">{user?.email}</p>
           </div>
 
           {/* Quick Actions */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
             <Link
               href="/invoices"
-              className="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow"
+              className="bg-white rounded-lg shadow-md p-4 sm:p-6 hover:shadow-lg transition-shadow active:scale-[0.98]"
             >
-              <div className="flex items-center justify-between mb-4">
-                <h3 className="text-lg font-semibold text-gray-900">Invoices</h3>
+              <div className="flex items-center justify-between mb-3 sm:mb-4">
+                <h3 className="text-base sm:text-lg font-semibold text-gray-900">Invoices</h3>
                 <svg
-                  className="w-6 h-6 text-blue-600"
+                  className="w-5 h-5 sm:w-6 sm:h-6 text-blue-600"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -66,16 +66,16 @@ export default function DashboardPage() {
                   />
                 </svg>
               </div>
-              <p className="text-gray-600 text-sm">
+              <p className="text-gray-600 text-xs sm:text-sm">
                 View and manage your invoices
               </p>
             </Link>
 
-            <div className="bg-white rounded-lg shadow-md p-6 opacity-50 cursor-not-allowed">
-              <div className="flex items-center justify-between mb-4">
-                <h3 className="text-lg font-semibold text-gray-900">Clients</h3>
+            <div className="bg-white rounded-lg shadow-md p-4 sm:p-6 opacity-50 cursor-not-allowed">
+              <div className="flex items-center justify-between mb-3 sm:mb-4">
+                <h3 className="text-base sm:text-lg font-semibold text-gray-900">Clients</h3>
                 <svg
-                  className="w-6 h-6 text-gray-400"
+                  className="w-5 h-5 sm:w-6 sm:h-6 text-gray-400"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -88,16 +88,16 @@ export default function DashboardPage() {
                   />
                 </svg>
               </div>
-              <p className="text-gray-600 text-sm">
+              <p className="text-gray-600 text-xs sm:text-sm">
                 Coming soon
               </p>
             </div>
 
-            <div className="bg-white rounded-lg shadow-md p-6 opacity-50 cursor-not-allowed">
-              <div className="flex items-center justify-between mb-4">
-                <h3 className="text-lg font-semibold text-gray-900">Reports</h3>
+            <div className="bg-white rounded-lg shadow-md p-4 sm:p-6 opacity-50 cursor-not-allowed">
+              <div className="flex items-center justify-between mb-3 sm:mb-4">
+                <h3 className="text-base sm:text-lg font-semibold text-gray-900">Reports</h3>
                 <svg
-                  className="w-6 h-6 text-gray-400"
+                  className="w-5 h-5 sm:w-6 sm:h-6 text-gray-400"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -110,7 +110,7 @@ export default function DashboardPage() {
                   />
                 </svg>
               </div>
-              <p className="text-gray-600 text-sm">
+              <p className="text-gray-600 text-xs sm:text-sm">
                 Coming soon
               </p>
             </div>

@@ -18,7 +18,7 @@ export default function LoadingSpinner({ size = 'md', message }: LoadingSpinnerP
         <div
           className={`${sizeClasses[size]} inline-block animate-spin rounded-full border-4 border-solid border-current border-r-transparent`}
         ></div>
-        {message && <p className="mt-4 text-sm text-gray-600">{message}</p>}
+        {message && <p className="mt-3 sm:mt-4 text-xs sm:text-sm text-gray-600">{message}</p>}
       </div>
     </div>
   );

@@ -12,10 +12,10 @@ export default function ErrorMessage({
   onRetry 
 }: ErrorMessageProps) {
   return (
-    <div className="bg-white rounded-lg shadow-md p-8 text-center">
-      <div className="text-red-600 mb-4">
+    <div className="bg-white rounded-lg shadow-md p-6 sm:p-8 text-center">
+      <div className="text-red-600 mb-3 sm:mb-4">
         <svg
-          className="w-12 h-12 mx-auto"
+          className="w-10 h-10 sm:w-12 sm:h-12 mx-auto"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
@@ -28,12 +28,12 @@ export default function ErrorMessage({
           />
         </svg>
       </div>
-      <h3 className="text-lg font-semibold text-gray-900 mb-2">{title}</h3>
-      <p className="text-gray-600 mb-4">{message}</p>
+      <h3 className="text-base sm:text-lg font-semibold text-gray-900 mb-2">{title}</h3>
+      <p className="text-sm sm:text-base text-gray-600 mb-3 sm:mb-4 px-2">{message}</p>
       {onRetry && (
         <button
           onClick={onRetry}
-          className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
+          className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors active:scale-95 text-sm sm:text-base"
         >
           Try Again
         </button>
