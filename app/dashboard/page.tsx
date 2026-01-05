@@ -90,7 +90,7 @@ export default function DashboardPage() {
 
   return (
     <ProtectedRoute>
-      <div className="min-h-screen bg-gray-900">
+      <div className="min-h-screen">
         {/* Sidebar - Desktop */}
         <aside className="hidden md:fixed md:inset-y-0 md:flex md:w-64 md:flex-col">
           <div className="flex flex-col flex-grow bg-black/40 backdrop-blur-xl border-r border-gray-800 overflow-y-auto">
@@ -99,7 +99,7 @@ export default function DashboardPage() {
                 <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-green-400 to-emerald-600 flex items-center justify-center">
                   <span className="text-white font-bold text-sm">IA</span>
                 </div>
-                <span className="text-white font-semibold text-lg">Invoize</span>
+                <span className="text-white font-bold text-lg">InvoiceApp</span>
               </div>
             </div>
             <nav className="flex-1 px-3 space-y-1">
@@ -185,7 +185,7 @@ export default function DashboardPage() {
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
                     </svg>
                   </button>
-                  <Link href="/invoices" className="hidden sm:inline-flex items-center px-4 py-2.5 text-sm font-semibold bg-blue-600 text-white rounded-full hover:bg-blue-700 transition-all shadow-lg shadow-emerald-500/30 hover:-translate-y-0.5">
+                  <Link href="/invoices" className="hidden sm:inline-flex items-center px-4 py-2.5 text-sm font-semibold bg-green-600 text-white rounded-full hover:bg-green-700 transition-all shadow-lg shadow-green-500/30 hover:-translate-y-0.5">
                     + Create Invoice
                   </Link>
                 </div>
@@ -193,10 +193,10 @@ export default function DashboardPage() {
             </div>
           </header>
 
-          <main className="px-4 sm:px-6 lg:px-8 py-6 bg-gray-900">
+          <main className="px-4 sm:px-6 lg:px-8 py-6">
             {/* Stats Grid */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-6">
-              <div className="bg-gray-900 rounded-2xl shadow-2xl p-6 border-2 border-green-500/30 hover:border-green-500/50 transition-all">
+              <div className="rounded-2xl shadow-2xl p-6 border-2 border-green-500/30 hover:border-green-500/50 transition-all backdrop-blur-sm bg-black/20">
                 <div className="flex items-center justify-between mb-4">
                   <div className="p-3 bg-green-500/10 rounded-xl">
                     <svg className="w-6 h-6 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -208,7 +208,7 @@ export default function DashboardPage() {
                 <p className="text-4xl font-bold text-white">{totalInvoices}</p>
               </div>
 
-              <div className="bg-gray-900 rounded-2xl shadow-2xl p-6 border-2 border-green-500/30 hover:border-green-500/50 transition-all">
+              <div className="rounded-2xl shadow-2xl p-6 border-2 border-green-500/30 hover:border-green-500/50 transition-all backdrop-blur-sm bg-black/20">
                 <div className="flex items-center justify-between mb-4">
                   <div className="p-3 bg-blue-500/10 rounded-xl">
                     <svg className="w-6 h-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -220,7 +220,7 @@ export default function DashboardPage() {
                 <p className="text-4xl font-bold text-white">{formatCurrency(outstandingAmount)}</p>
               </div>
 
-              <div className="bg-gray-900 rounded-2xl shadow-2xl p-6 border-2 border-green-500/30 hover:border-green-500/50 transition-all">
+              <div className="rounded-2xl shadow-2xl p-6 border-2 border-green-500/30 hover:border-green-500/50 transition-all backdrop-blur-sm bg-black/20">
                 <div className="flex items-center justify-between mb-4">
                   <div className="p-3 bg-emerald-500/10 rounded-xl">
                     <svg className="w-6 h-6 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -232,7 +232,7 @@ export default function DashboardPage() {
                 <p className="text-4xl font-bold text-white">{formatCurrency(paidThisMonth)}</p>
               </div>
 
-              <div className="bg-gray-900 rounded-2xl shadow-2xl p-6 border-2 border-green-500/30 hover:border-green-500/50 transition-all">
+              <div className="rounded-2xl shadow-2xl p-6 border-2 border-green-500/30 hover:border-green-500/50 transition-all backdrop-blur-sm bg-black/20">
                 <div className="flex items-center justify-between mb-4">
                   <div className="p-3 bg-purple-500/10 rounded-xl">
                     <svg className="w-6 h-6 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -248,7 +248,7 @@ export default function DashboardPage() {
             {/* Charts Row */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
               {/* Cashflow Summary */}
-              <div className="bg-gray-900 rounded-2xl shadow-2xl p-6 border-2 border-green-500/30">
+              <div className="rounded-2xl shadow-2xl p-6 border-2 border-green-500/30 backdrop-blur-sm bg-black/20">
                 <h3 className="text-lg font-semibold text-white mb-1">Cashflow summary</h3>
                 <p className="text-sm text-gray-400 mb-6">Last 6 Month</p>
                 <div className="h-48 flex items-end justify-between gap-2">
@@ -267,7 +267,7 @@ export default function DashboardPage() {
               </div>
 
               {/* Invoice by Amount */}
-              <div className="bg-gray-900 rounded-2xl shadow-2xl p-6 border-2 border-green-500/30">
+              <div className="rounded-2xl shadow-2xl p-6 border-2 border-green-500/30 backdrop-blur-sm bg-black/20">
                 <h3 className="text-lg font-semibold text-white mb-1">Invoice by Amount</h3>
                 <p className="text-sm text-gray-400 mb-6">Status Distribution</p>
                 <div className="h-48 flex items-end justify-around gap-4">
@@ -296,19 +296,19 @@ export default function DashboardPage() {
             </div>
 
             {/* Recent Invoices Table */}
-            <div className="bg-gray-900 rounded-2xl shadow-2xl border-2 border-green-500/30 overflow-hidden">
-              <div className="px-6 py-4 border-b border-gray-800 flex justify-between items-center">
+            <div className="bg-gray-800/50 backdrop-blur-xl rounded-2xl shadow-xl border border-gray-700/50 overflow-hidden">
+              <div className="px-6 py-4 border-b border-gray-700/50 flex justify-between items-center">
                 <div>
                   <h3 className="text-lg font-semibold text-white">Recent Invoices</h3>
                   <p className="text-sm text-gray-400">Latest invoice activities</p>
                 </div>
-                <Link href="/invoices" className="text-sm text-green-400 hover:text-green-300 font-medium transition-colors">
+                <Link href="/invoices" className="text-sm text-green-600 hover:text-green-700 font-medium">
                   View all →
                 </Link>
               </div>
               <div className="overflow-x-auto">
                 <table className="w-full">
-                  <thead className="bg-gray-800/50 border-b border-gray-800">
+                  <thead className="bg-gray-900/50 border-b border-gray-700/50">
                     <tr>
                       <th className="px-6 py-3 text-left text-xs font-semibold text-gray-400 uppercase">Invoice#</th>
                       <th className="px-6 py-3 text-left text-xs font-semibold text-gray-400 uppercase">Client</th>
@@ -318,7 +318,7 @@ export default function DashboardPage() {
                       <th className="px-6 py-3 text-left text-xs font-semibold text-gray-400 uppercase">Status</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-gray-800">
+                  <tbody className="divide-y divide-gray-700/50">
                     {isLoading ? (
                       <tr>
                         <td colSpan={6} className="px-6 py-8 text-center text-gray-400">Loading invoices...</td>
@@ -329,7 +329,7 @@ export default function DashboardPage() {
                       </tr>
                     ) : (
                       invoices.slice(0, 5).map((invoice) => (
-                        <tr key={invoice.id} className="hover:bg-gray-800/30 transition-colors">
+                        <tr key={invoice.id} className="hover:bg-gray-700/30 transition-colors">
                           <td className="px-6 py-4 text-sm font-medium text-white">{invoice.invoice_number}</td>
                           <td className="px-6 py-4 text-sm text-gray-300">{invoice.client_name}</td>
                           <td className="px-6 py-4 text-sm text-gray-400">{formatDate(invoice.issue_date)}</td>
