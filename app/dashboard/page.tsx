@@ -90,10 +90,10 @@ export default function DashboardPage() {
 
   return (
     <ProtectedRoute>
-      <div className="min-h-screen bg-gray-50">
+      <div className="min-h-screen bg-gray-900">
         {/* Sidebar - Desktop */}
         <aside className="hidden md:fixed md:inset-y-0 md:flex md:w-64 md:flex-col">
-          <div className="flex flex-col flex-grow bg-gray-900 overflow-y-auto">
+          <div className="flex flex-col flex-grow bg-black/40 backdrop-blur-xl border-r border-gray-800 overflow-y-auto">
             <div className="flex items-center flex-shrink-0 px-6 py-5">
               <div className="flex items-center gap-2">
                 <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-green-400 to-emerald-600 flex items-center justify-center">
@@ -156,31 +156,31 @@ export default function DashboardPage() {
         {/* Main Content */}
         <div className="md:pl-64">
           {/* Top Header */}
-          <header className="bg-white border-b border-gray-200 sticky top-0 z-10">
+          <header className="bg-black/40 backdrop-blur-xl border-b border-gray-800 sticky top-0 z-10">
             <div className="px-4 sm:px-6 lg:px-8 py-4">
               <div className="flex justify-between items-center">
                 <div>
-                  <h1 className="text-2xl font-bold text-gray-900">Welcome {user?.name?.split(' ')[0] || 'John'}!</h1>
-                  <p className="text-sm text-gray-600 mt-1">Overview</p>
+                  <h1 className="text-2xl font-bold text-white">Welcome {user?.name?.split(' ')[0] || 'John'}!</h1>
+                  <p className="text-sm text-gray-400 mt-1">Overview</p>
                 </div>
                 <div className="flex items-center gap-3">
-                  <button className="p-2 text-gray-400 hover:text-gray-600 rounded-lg hover:bg-gray-100">
+                  <button className="p-2 text-gray-400 hover:text-white rounded-lg hover:bg-gray-800/50">
                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                     </svg>
                   </button>
-                  <button className="p-2 text-gray-400 hover:text-gray-600 rounded-lg hover:bg-gray-100 relative">
+                  <button className="p-2 text-gray-400 hover:text-white rounded-lg hover:bg-gray-800/50 relative">
                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
                     </svg>
                     <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-red-500 rounded-full"></span>
                   </button>
-                  <button className="flex items-center gap-2 p-2 hover:bg-gray-100 rounded-lg">
+                  <button className="flex items-center gap-2 p-2 hover:bg-gray-800/50 rounded-lg">
                     <div className="w-8 h-8 rounded-full bg-gradient-to-br from-green-400 to-emerald-600 flex items-center justify-center text-white text-sm font-semibold">
                       {user?.name?.charAt(0) || 'J'}
                     </div>
                   </button>
-                  <button className="md:hidden p-2 text-gray-400 hover:text-gray-600 rounded-lg hover:bg-gray-100">
+                  <button className="md:hidden p-2 text-gray-400 hover:text-white rounded-lg hover:bg-gray-800/50">
                     <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
                     </svg>
@@ -193,70 +193,70 @@ export default function DashboardPage() {
             </div>
           </header>
 
-          <main className="px-4 sm:px-6 lg:px-8 py-6 bg-gray-50">
+          <main className="px-4 sm:px-6 lg:px-8 py-6 bg-gray-900">
             {/* Stats Grid */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-6">
-              <div className="bg-white rounded-2xl shadow-sm p-5 border border-gray-100">
+              <div className="bg-gray-800/50 backdrop-blur-xl rounded-2xl shadow-xl p-5 border border-gray-700/50">
                 <div className="flex items-center justify-between mb-3">
-                  <div className="p-2.5 bg-green-100 rounded-xl">
-                    <svg className="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <div className="p-2.5 bg-green-500/20 rounded-xl">
+                    <svg className="w-5 h-5 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                     </svg>
                   </div>
                 </div>
-                <p className="text-sm text-gray-600 font-medium mb-1">Total invoice</p>
-                <p className="text-3xl font-bold text-gray-900">{totalInvoices}</p>
+                <p className="text-sm text-gray-400 font-medium mb-1">Total invoice</p>
+                <p className="text-3xl font-bold text-white">{totalInvoices}</p>
               </div>
 
-              <div className="bg-white rounded-2xl shadow-sm p-5 border border-gray-100">
+              <div className="bg-gray-800/50 backdrop-blur-xl rounded-2xl shadow-xl p-5 border border-gray-700/50">
                 <div className="flex items-center justify-between mb-3">
-                  <div className="p-2.5 bg-blue-100 rounded-xl">
-                    <svg className="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <div className="p-2.5 bg-blue-500/20 rounded-xl">
+                    <svg className="w-5 h-5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
                   </div>
                 </div>
-                <p className="text-sm text-gray-600 font-medium mb-1">Outstanding Amounts</p>
-                <p className="text-3xl font-bold text-gray-900">{formatCurrency(outstandingAmount)}</p>
+                <p className="text-sm text-gray-400 font-medium mb-1">Outstanding Amounts</p>
+                <p className="text-3xl font-bold text-white">{formatCurrency(outstandingAmount)}</p>
               </div>
 
-              <div className="bg-white rounded-2xl shadow-sm p-5 border border-gray-100">
+              <div className="bg-gray-800/50 backdrop-blur-xl rounded-2xl shadow-xl p-5 border border-gray-700/50">
                 <div className="flex items-center justify-between mb-3">
-                  <div className="p-2.5 bg-emerald-100 rounded-xl">
-                    <svg className="w-5 h-5 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <div className="p-2.5 bg-emerald-500/20 rounded-xl">
+                    <svg className="w-5 h-5 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
                   </div>
                 </div>
-                <p className="text-sm text-gray-600 font-medium mb-1">Paid this month</p>
-                <p className="text-3xl font-bold text-gray-900">{formatCurrency(paidThisMonth)}</p>
+                <p className="text-sm text-gray-400 font-medium mb-1">Paid this month</p>
+                <p className="text-3xl font-bold text-white">{formatCurrency(paidThisMonth)}</p>
               </div>
 
-              <div className="bg-white rounded-2xl shadow-sm p-5 border border-gray-100">
+              <div className="bg-gray-800/50 backdrop-blur-xl rounded-2xl shadow-xl p-5 border border-gray-700/50">
                 <div className="flex items-center justify-between mb-3">
-                  <div className="p-2.5 bg-purple-100 rounded-xl">
-                    <svg className="w-5 h-5 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <div className="p-2.5 bg-purple-500/20 rounded-xl">
+                    <svg className="w-5 h-5 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
                   </div>
                 </div>
-                <p className="text-sm text-gray-600 font-medium mb-1">Upcoming Payments</p>
-                <p className="text-3xl font-bold text-gray-900">{upcomingPayments}</p>
+                <p className="text-sm text-gray-400 font-medium mb-1">Upcoming Payments</p>
+                <p className="text-3xl font-bold text-white">{upcomingPayments}</p>
               </div>
             </div>
 
             {/* Charts Row */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
               {/* Cashflow Summary - Placeholder */}
-              <div className="bg-white rounded-2xl shadow-sm p-6 border border-gray-100">
-                <h3 className="text-lg font-semibold text-gray-900 mb-1">Cashflow summary</h3>
-                <p className="text-sm text-gray-500 mb-6">Last 6 Month</p>
+              <div className="bg-gray-800/50 backdrop-blur-xl rounded-2xl shadow-xl p-6 border border-gray-700/50">
+                <h3 className="text-lg font-semibold text-white mb-1">Cashflow summary</h3>
+                <p className="text-sm text-gray-400 mb-6">Last 6 Month</p>
                 <div className="h-48 flex items-end justify-between gap-2">
                   {[65, 85, 70, 90, 75, 95].map((height, i) => (
                     <div key={i} className="flex-1 bg-gradient-to-t from-green-500 to-emerald-400 rounded-t-lg" style={{height: `${height}%`}}></div>
                   ))}
                 </div>
-                <div className="flex justify-between mt-3 text-xs text-gray-500">
+                <div className="flex justify-between mt-3 text-xs text-gray-400">
                   <span>Jan</span>
                   <span>Feb</span>
                   <span>Mar</span>
@@ -267,40 +267,40 @@ export default function DashboardPage() {
               </div>
 
               {/* Invoice by Amount - Bar Chart */}
-              <div className="bg-white rounded-2xl shadow-sm p-6 border border-gray-100">
-                <h3 className="text-lg font-semibold text-gray-900 mb-1">Invoice by Amount</h3>
-                <p className="text-sm text-gray-500 mb-6">Last 6 Month</p>
+              <div className="bg-gray-800/50 backdrop-blur-xl rounded-2xl shadow-xl p-6 border border-gray-700/50">
+                <h3 className="text-lg font-semibold text-white mb-1">Invoice by Amount</h3>
+                <p className="text-sm text-gray-400 mb-6">Last 6 Month</p>
                 <div className="h-48 flex items-end justify-around gap-3">
                   <div className="flex flex-col items-center flex-1">
-                    <div className="w-full bg-gray-200 rounded-t-lg" style={{height: `${(statusCounts.draft / Math.max(...Object.values(statusCounts), 1)) * 100}%`, minHeight: '20px'}}></div>
-                    <span className="text-xs text-gray-600 mt-2">Draft</span>
-                    <span className="text-xs font-semibold text-gray-900">{statusCounts.draft}</span>
+                    <div className="w-full bg-gray-600 rounded-t-lg" style={{height: `${(statusCounts.draft / Math.max(...Object.values(statusCounts), 1)) * 100}%`, minHeight: '20px'}}></div>
+                    <span className="text-xs text-gray-400 mt-2">Draft</span>
+                    <span className="text-xs font-semibold text-white">{statusCounts.draft}</span>
                   </div>
                   <div className="flex flex-col items-center flex-1">
                     <div className="w-full bg-blue-400 rounded-t-lg" style={{height: `${(statusCounts.sent / Math.max(...Object.values(statusCounts), 1)) * 100}%`, minHeight: '20px'}}></div>
-                    <span className="text-xs text-gray-600 mt-2">Sent</span>
-                    <span className="text-xs font-semibold text-gray-900">{statusCounts.sent}</span>
+                    <span className="text-xs text-gray-400 mt-2">Sent</span>
+                    <span className="text-xs font-semibold text-white">{statusCounts.sent}</span>
                   </div>
                   <div className="flex flex-col items-center flex-1">
                     <div className="w-full bg-green-500 rounded-t-lg" style={{height: `${(statusCounts.paid / Math.max(...Object.values(statusCounts), 1)) * 100}%`, minHeight: '20px'}}></div>
-                    <span className="text-xs text-gray-600 mt-2">Paid</span>
-                    <span className="text-xs font-semibold text-gray-900">{statusCounts.paid}</span>
+                    <span className="text-xs text-gray-400 mt-2">Paid</span>
+                    <span className="text-xs font-semibold text-white">{statusCounts.paid}</span>
                   </div>
                   <div className="flex flex-col items-center flex-1">
                     <div className="w-full bg-red-400 rounded-t-lg" style={{height: `${(statusCounts.overdue / Math.max(...Object.values(statusCounts), 1)) * 100}%`, minHeight: '20px'}}></div>
-                    <span className="text-xs text-gray-600 mt-2">Overdue</span>
-                    <span className="text-xs font-semibold text-gray-900">{statusCounts.overdue}</span>
+                    <span className="text-xs text-gray-400 mt-2">Overdue</span>
+                    <span className="text-xs font-semibold text-white">{statusCounts.overdue}</span>
                   </div>
                 </div>
               </div>
             </div>
 
             {/* Recent Invoices Table */}
-            <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
-              <div className="px-6 py-4 border-b border-gray-100 flex justify-between items-center">
+            <div className="bg-gray-800/50 backdrop-blur-xl rounded-2xl shadow-xl border border-gray-700/50 overflow-hidden">
+              <div className="px-6 py-4 border-b border-gray-700/50 flex justify-between items-center">
                 <div>
-                  <h3 className="text-lg font-semibold text-gray-900">Recent Invoices</h3>
-                  <p className="text-sm text-gray-500">Latest invoice activities</p>
+                  <h3 className="text-lg font-semibold text-white">Recent Invoices</h3>
+                  <p className="text-sm text-gray-400">Latest invoice activities</p>
                 </div>
                 <Link href="/invoices" className="text-sm text-green-600 hover:text-green-700 font-medium">
                   View all →
@@ -308,33 +308,33 @@ export default function DashboardPage() {
               </div>
               <div className="overflow-x-auto">
                 <table className="w-full">
-                  <thead className="bg-gray-50 border-b border-gray-100">
+                  <thead className="bg-gray-900/50 border-b border-gray-700/50">
                     <tr>
-                      <th className="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase">Invoice#</th>
-                      <th className="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase">Client</th>
-                      <th className="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase">Issue Date</th>
-                      <th className="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase">Due Date</th>
-                      <th className="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase">Amount($)</th>
-                      <th className="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase">Status</th>
+                      <th className="px-6 py-3 text-left text-xs font-semibold text-gray-400 uppercase">Invoice#</th>
+                      <th className="px-6 py-3 text-left text-xs font-semibold text-gray-400 uppercase">Client</th>
+                      <th className="px-6 py-3 text-left text-xs font-semibold text-gray-400 uppercase">Issue Date</th>
+                      <th className="px-6 py-3 text-left text-xs font-semibold text-gray-400 uppercase">Due Date</th>
+                      <th className="px-6 py-3 text-left text-xs font-semibold text-gray-400 uppercase">Amount($)</th>
+                      <th className="px-6 py-3 text-left text-xs font-semibold text-gray-400 uppercase">Status</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-gray-100">
+                  <tbody className="divide-y divide-gray-700/50">
                     {isLoading ? (
                       <tr>
-                        <td colSpan={6} className="px-6 py-8 text-center text-gray-500">Loading invoices...</td>
+                        <td colSpan={6} className="px-6 py-8 text-center text-gray-400">Loading invoices...</td>
                       </tr>
                     ) : invoices.length === 0 ? (
                       <tr>
-                        <td colSpan={6} className="px-6 py-8 text-center text-gray-500">No invoices yet. Create your first invoice to get started!</td>
+                        <td colSpan={6} className="px-6 py-8 text-center text-gray-400">No invoices yet. Create your first invoice to get started!</td>
                       </tr>
                     ) : (
                       invoices.slice(0, 5).map((invoice) => (
-                        <tr key={invoice.id} className="hover:bg-gray-50 transition-colors">
-                          <td className="px-6 py-4 text-sm font-medium text-gray-900">{invoice.invoice_number}</td>
-                          <td className="px-6 py-4 text-sm text-gray-700">{invoice.client_name}</td>
-                          <td className="px-6 py-4 text-sm text-gray-600">{formatDate(invoice.issue_date)}</td>
-                          <td className="px-6 py-4 text-sm text-gray-600">{formatDate(invoice.due_date)}</td>
-                          <td className="px-6 py-4 text-sm font-semibold text-gray-900">{formatCurrency(invoice.amount)}</td>
+                        <tr key={invoice.id} className="hover:bg-gray-700/30 transition-colors">
+                          <td className="px-6 py-4 text-sm font-medium text-white">{invoice.invoice_number}</td>
+                          <td className="px-6 py-4 text-sm text-gray-300">{invoice.client_name}</td>
+                          <td className="px-6 py-4 text-sm text-gray-400">{formatDate(invoice.issue_date)}</td>
+                          <td className="px-6 py-4 text-sm text-gray-400">{formatDate(invoice.due_date)}</td>
+                          <td className="px-6 py-4 text-sm font-semibold text-white">{formatCurrency(invoice.amount)}</td>
                           <td className="px-6 py-4">
                             <span className={`px-3 py-1 text-xs font-semibold rounded-full ${getStatusColor(invoice.status)}`}>
                               {invoice.status.charAt(0).toUpperCase() + invoice.status.slice(1)}

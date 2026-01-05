@@ -109,9 +109,9 @@ export default function InvoicesPage() {
                     />
                   </svg>
                 </Link>
-                <h1 className="text-xl sm:text-3xl font-bold text-gray-900">Invoices</h1>
+                <h1 className="text-xl sm:text-2xl font-bold text-white">Invoices</h1>
               </div>
-              <button className="px-4 sm:px-6 py-2.5 sm:py-3 text-xs sm:text-sm font-semibold bg-blue-600 text-white rounded-full hover:bg-blue-700 shadow-lg shadow-emerald-500/30 transition-all hover:-translate-y-0.5 active:scale-95">
+              <button className="px-4 sm:px-6 py-2.5 text-xs sm:text-sm font-semibold bg-gradient-to-r from-green-400 to-emerald-600 text-white rounded-full hover:from-green-500 hover:to-emerald-700 shadow-lg shadow-green-500/30 transition-all hover:-translate-y-0.5 active:scale-95">
                 + New Invoice
               </button>
             </div>
@@ -193,48 +193,48 @@ export default function InvoicesPage() {
               onAction={filter === 'all' ? undefined : () => setFilter('all')}
             />
           ) : (
-            <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+            <div className="bg-gray-800/50 backdrop-blur-xl rounded-2xl shadow-xl border border-gray-700/50 overflow-hidden">
               {/* Desktop Table */}
               <div className="hidden md:block overflow-x-auto">
                 <table className="w-full">
-                  <thead className="bg-gray-50 border-b border-gray-100">
+                  <thead className="bg-gray-900/50 border-b border-gray-700/50">
                     <tr>
-                      <th className="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                      <th className="px-6 py-4 text-left text-xs font-semibold text-gray-400 uppercase tracking-wider">
                         Invoice #
                       </th>
-                      <th className="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                      <th className="px-6 py-4 text-left text-xs font-semibold text-gray-400 uppercase tracking-wider">
                         Client
                       </th>
-                      <th className="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                      <th className="px-6 py-4 text-left text-xs font-semibold text-gray-400 uppercase tracking-wider">
                         Issue Date
                       </th>
-                      <th className="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                      <th className="px-6 py-4 text-left text-xs font-semibold text-gray-400 uppercase tracking-wider">
                         Due Date
                       </th>
-                      <th className="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                      <th className="px-6 py-4 text-left text-xs font-semibold text-gray-400 uppercase tracking-wider">
                         Amount
                       </th>
-                      <th className="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                      <th className="px-6 py-4 text-left text-xs font-semibold text-gray-400 uppercase tracking-wider">
                         Status
                       </th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-gray-100">
+                  <tbody className="divide-y divide-gray-700/50">
                     {filteredInvoices.map((invoice) => (
-                      <tr key={invoice.id} className="hover:bg-gray-50 transition-colors cursor-pointer">
-                        <td className="px-6 py-4 whitespace-nowrap text-sm font-semibold text-gray-900">
+                      <tr key={invoice.id} className="hover:bg-gray-700/30 transition-colors cursor-pointer">
+                        <td className="px-6 py-4 whitespace-nowrap text-sm font-semibold text-white">
                           {invoice.invoice_number}
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-700">
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-300">
                           {invoice.client_name}
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-400">
                           {formatDate(invoice.issue_date)}
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-400">
                           {formatDate(invoice.due_date)}
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 font-bold">
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-white font-bold">
                           {formatCurrency(invoice.amount)}
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap">
@@ -253,15 +253,15 @@ export default function InvoicesPage() {
               </div>
 
               {/* Mobile Cards */}
-              <div className="md:hidden divide-y divide-gray-100">
+              <div className="md:hidden divide-y divide-gray-700/50">
                 {filteredInvoices.map((invoice) => (
-                  <div key={invoice.id} className="p-5 hover:bg-gray-50 transition-colors">
+                  <div key={invoice.id} className="p-5 hover:bg-gray-700/30 transition-colors">
                     <div className="flex justify-between items-start mb-3">
                       <div>
-                        <p className="text-sm font-semibold text-gray-900">
+                        <p className="text-sm font-semibold text-white">
                           {invoice.invoice_number}
                         </p>
-                        <p className="text-sm text-gray-600 mt-1">{invoice.client_name}</p>
+                        <p className="text-sm text-gray-300 mt-1">{invoice.client_name}</p>
                       </div>
                       <span
                         className={`px-3 py-1 text-xs font-semibold rounded-full ${getStatusColor(
@@ -273,10 +273,10 @@ export default function InvoicesPage() {
                     </div>
                     <div className="flex justify-between items-center mt-4">
                       <div>
-                        <p className="text-lg font-bold text-gray-900">
+                        <p className="text-lg font-bold text-white">
                           {formatCurrency(invoice.amount)}
                         </p>
-                        <p className="text-xs text-gray-500 mt-1">
+                        <p className="text-xs text-gray-400 mt-1">
                           Due: {formatDate(invoice.due_date)}
                         </p>
                       </div>
