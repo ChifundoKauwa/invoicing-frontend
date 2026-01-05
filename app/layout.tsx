@@ -30,54 +30,7 @@ export default function RootLayout({
         className={`${inter.variable} ${mono.variable} antialiased`}
       >
         <AuthProvider>
-          <div className="flex min-h-screen flex-col bg-gray-50 text-gray-900">
-            <header className="fixed top-0 left-0 right-0 border-b border-gray-800 bg-gray-950/80 backdrop-blur z-30">
-              <div className="mx-auto flex h-14 max-w-6xl items-center justify-between px-4 sm:px-6 lg:px-8">
-                <div className="flex items-center gap-2">
-                  <span className="inline-flex h-6 w-6 items-center justify-center rounded bg-blue-600 text-xs font-semibold text-white">
-                    IA
-                  </span>
-                  <span className="text-xs sm:text-sm font-semibold text-white">
-                    Invoicing App
-                  </span>
-                </div>
-                
-                {/* Desktop Navigation */}
-                <nav className="hidden lg:flex items-center gap-4 text-xs sm:text-sm">
-                  <a href="/" className="text-white hover:text-white/80">
-                    Home
-                  </a>
-                  <a href="/login" className="text-white hover:text-white/80">
-                    Sign in
-                  </a>
-                  <a
-                    href="/register"
-                    className="rounded-full bg-blue-600 px-3 py-1.5 text-xs font-semibold text-white hover:bg-blue-700"
-                  >
-                    Get started
-                  </a>
-                </nav>
-                
-                {/* Mobile Navigation */}
-                <MobileNav />
-              </div>
-            </header>
-
-            <main className="flex-1 pt-14">
-              {children}
-            </main>
-
-            <footer className="border-t border-gray-900 bg-gray-950/80">
-              <div className="mx-auto flex max-w-6xl flex-col sm:flex-row items-center justify-between gap-2 px-4 py-4 text-xs text-gray-500 sm:text-sm">
-                <span className="text-center sm:text-left">
-                  © {new Date().getFullYear()} Invoicing App. All rights reserved.
-                </span>
-                <span className="hidden sm:inline text-center sm:text-right">
-                  Built with Next.js &amp; a Supabase-inspired dark theme.
-                </span>
-              </div>
-            </footer>
-          </div>
+          {children}
         </AuthProvider>
       </body>
     </html>
