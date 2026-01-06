@@ -24,6 +24,7 @@ export default function CreateInvoicePage() {
   const [clientEmail, setClientEmail] = useState('');
   const [issueDate, setIssueDate] = useState(new Date().toISOString().split('T')[0]);
   const [dueDate, setDueDate] = useState('');
+  const [currency, setCurrency] = useState('USD');
   const [items, setItems] = useState<InvoiceItem[]>([
     { id: '1', description: '', quantity: 1, unit_price: 0 }
   ]);
@@ -67,10 +68,7 @@ export default function CreateInvoicePage() {
         status,
         issue_date: issueDate,
         due_date: dueDate,
-        items,
-        tax_rate: taxRate,
-        discount,
-        notes
+        currency: currency,
       });
       router.push('/invoices');
     } catch (err: any) {
@@ -83,7 +81,7 @@ export default function CreateInvoicePage() {
   const formatCurrency = (amount: number) => {
     return new Intl.NumberFormat('en-US', {
       style: 'currency',
-      currency: 'USD'
+      currency: currency
     }).format(amount);
   };
 
@@ -112,14 +110,14 @@ export default function CreateInvoicePage() {
                 <button
                   onClick={(e) => handleSubmit(e, 'draft')}
                   disabled={isLoading}
-                  className="px-4 py-2 text-sm font-semibold text-gray-300 hover:text-white border border-gray-700 rounded-lg hover:bg-gray-800 transition-all disabled:opacity-50"
+                  className="px-5 py-2.5 text-sm font-semibold text-white border-2 border-primary/50 rounded-lg hover:bg-primary/10 hover:border-primary transition-all disabled:opacity-50"
                 >
                   Save as Draft
                 </button>
                 <button
                   onClick={(e) => handleSubmit(e, 'sent')}
                   disabled={isLoading}
-                  className="px-6 py-2 text-sm font-semibold bg-primary hover:bg-primary-accent text-gray-900 rounded-lg transition-all shadow-lg shadow-primary/30 disabled:opacity-50"
+                  className="px-6 py-2.5 text-sm font-semibold bg-primary hover:bg-primary-accent text-gray-900 rounded-lg transition-all shadow-lg shadow-primary/30 disabled:opacity-50"
                 >
                   Send Invoice
                 </button>
@@ -144,7 +142,7 @@ export default function CreateInvoicePage() {
             <div className="space-y-6">
               
               {/* Invoice Details Card */}
-              <div className="backdrop-blur-sm border border-gray-800 rounded-xl p-6">
+              <div className="backdrop-blur-sm border-2 border-primary/20 hover:border-primary/40 rounded-xl p-6 transition-all">
                 <h2 className="text-lg font-semibold text-white mb-4">Invoice Details</h2>
                 <div className="space-y-4">
                   <div className="grid grid-cols-2 gap-4">
@@ -179,11 +177,33 @@ export default function CreateInvoicePage() {
                       required
                     />
                   </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-400 mb-2">Currency</label>
+                    <select
+                      value={currency}
+                      onChange={(e) => setCurrency(e.target.value)}
+                      className="w-full px-4 py-2.5 bg-gray-800/50 border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                    >
+                      <option value="USD">USD - US Dollar</option>
+                      <option value="EUR">EUR - Euro</option>
+                      <option value="GBP">GBP - British Pound</option>
+                      <option value="MWK">MWK - Malawian Kwacha</option>
+                      <option value="ZAR">ZAR - South African Rand</option>
+                      <option value="KES">KES - Kenyan Shilling</option>
+                      <option value="TZS">TZS - Tanzanian Shilling</option>
+                      <option value="UGX">UGX - Ugandan Shilling</option>
+                      <option value="CAD">CAD - Canadian Dollar</option>
+                      <option value="AUD">AUD - Australian Dollar</option>
+                      <option value="JPY">JPY - Japanese Yen</option>
+                      <option value="CNY">CNY - Chinese Yuan</option>
+                      <option value="INR">INR - Indian Rupee</option>
+                    </select>
+                  </div>
                 </div>
               </div>
 
               {/* Client Information Card */}
-              <div className="backdrop-blur-sm border border-gray-800 rounded-xl p-6">
+              <div className="backdrop-blur-sm border-2 border-primary/20 hover:border-primary/40 rounded-xl p-6 transition-all">
                 <h2 className="text-lg font-semibold text-white mb-4">Client Information</h2>
                 <div className="space-y-4">
                   <div>
@@ -212,7 +232,7 @@ export default function CreateInvoicePage() {
               </div>
 
               {/* Items Card */}
-              <div className="backdrop-blur-sm border border-gray-800 rounded-xl p-6">
+              <div className="backdrop-blur-sm border-2 border-primary/20 hover:border-primary/40 rounded-xl p-6 transition-all">
                 <div className="flex justify-between items-center mb-4">
                   <h2 className="text-lg font-semibold text-white">Items / Services</h2>
                   <button
@@ -277,7 +297,7 @@ export default function CreateInvoicePage() {
               </div>
 
               {/* Additional Options Card */}
-              <div className="backdrop-blur-sm border border-gray-800 rounded-xl p-6">
+              <div className="backdrop-blur-sm border-2 border-primary/20 hover:border-primary/40 rounded-xl p-6 transition-all">
                 <h2 className="text-lg font-semibold text-white mb-4">Additional Options</h2>
                 <div className="grid grid-cols-2 gap-4 mb-4">
                   <div>
@@ -320,7 +340,7 @@ export default function CreateInvoicePage() {
 
             {/* Right Panel - Preview */}
             <div className="lg:sticky lg:top-24 h-fit">
-              <div className="backdrop-blur-sm border border-gray-800 rounded-xl p-8">
+              <div className="backdrop-blur-sm border-2 border-primary/30 rounded-xl p-8 shadow-lg shadow-primary/10">
                 <div className="flex justify-between items-start mb-8">
                   <div>
                     <h3 className="text-2xl font-display font-bold">

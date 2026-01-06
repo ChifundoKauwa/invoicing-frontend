@@ -68,32 +68,29 @@ export default function InvoicesPage() {
   const getStatusColor = (status: string) => {
     switch (status) {
       case 'paid':
-        return 'bg-green-100 text-green-800';
+        return 'bg-primary/20 text-primary border-primary/40';
       case 'sent':
-        return 'bg-blue-100 text-blue-800';
+        return 'bg-blue-500/20 text-blue-400 border-blue-500/40';
       case 'overdue':
-        return 'bg-red-100 text-red-800';
+        return 'bg-red-500/20 text-red-400 border-red-500/40';
       case 'draft':
-        return 'bg-gray-100 text-gray-800';
+        return 'bg-gray-500/20 text-gray-400 border-gray-500/40';
       default:
-        return 'bg-gray-100 text-gray-800';
+        return 'bg-gray-500/20 text-gray-400 border-gray-500/40';
     }
   };
 
   return (
     <ProtectedRoute>
-      <div className="min-h-screen bg-gray-50">
-        {/* Subtle gradient overlay */}
-        <div className="fixed inset-0 bg-gradient-to-br from-gray-50 via-gray-50 to-blue-950/20 pointer-events-none"></div>
-
+      <div className="min-h-screen">
         {/* Header */}
-        <header className="relative bg-white/5 backdrop-blur-md border-b border-gray-200 shadow-lg">
+        <header className="sticky top-0 z-40 backdrop-blur-md border-b border-gray-800">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-5">
             <div className="flex justify-between items-center">
               <div className="flex items-center gap-3">
                 <Link
                   href="/dashboard"
-                  className="text-gray-400 hover:text-white transition-colors"
+                  className="text-gray-400 hover:text-primary transition-colors"
                 >
                   <svg
                     className="w-5 h-5 sm:w-6 sm:h-6"
@@ -105,15 +102,18 @@ export default function InvoicesPage() {
                       strokeLinecap="round"
                       strokeLinejoin="round"
                       strokeWidth={2}
-                      d="M15 19l-7-7 7-7"
+                      d="M10 19l-7-7m0 0l7-7m-7 7h18"
                     />
                   </svg>
                 </Link>
-                <h1 className="text-xl sm:text-2xl font-bold text-white">Invoices</h1>
+                <div>
+                  <h1 className="text-xl sm:text-2xl font-bold text-white">Invoices</h1>
+                  <p className="text-xs sm:text-sm text-gray-400 mt-0.5">Manage your invoices</p>
+                </div>
               </div>
               <Link
                 href="/invoices/create"
-                className="px-4 sm:px-6 py-2.5 text-xs sm:text-sm font-semibold bg-gradient-to-r from-green-400 to-emerald-600 text-white rounded-full hover:from-green-500 hover:to-emerald-700 shadow-lg shadow-green-500/30 transition-all hover:-translate-y-0.5 active:scale-95"
+                className="px-4 sm:px-6 py-2.5 text-xs sm:text-sm font-semibold bg-primary hover:bg-primary-accent text-gray-900 rounded-lg shadow-lg shadow-primary/30 transition-all hover:scale-105 active:scale-95"
               >
                 + New Invoice
               </Link>
@@ -123,55 +123,71 @@ export default function InvoicesPage() {
 
         {/* Main Content */}
         <main className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
-          {/* Filters */}
-          <div className="bg-white backdrop-blur-lg border border-gray-200 rounded-2xl shadow-xl p-4 sm:p-5 mb-6">
-            <div className="flex flex-wrap gap-2 sm:gap-3">
+          {/* Filters & Search */}
+          <div className="backdrop-blur-sm border-2 border-primary/20 rounded-xl p-4 sm:p-5 mb-6 shadow-lg">
+            <div className="flex flex-col sm:flex-row gap-4 mb-4">
+              <div className="flex-1">
+                <div className="relative">
+                  <svg className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                  </svg>
+                  <input
+                    type="text"
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    placeholder="Search invoices..."
+                    className="w-full pl-10 pr-4 py-2.5 bg-gray-800/50 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                  />
+                </div>
+              </div>
+            </div>
+            <div className="flex flex-wrap gap-2">
               <button
                 onClick={() => setFilter('all')}
-                className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
+                className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all ${
                   filter === 'all'
-                    ? 'bg-blue-600 text-white shadow-lg shadow-emerald-500/30'
-                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200 border border-gray-200'
+                    ? 'bg-primary text-gray-900 shadow-lg shadow-primary/30'
+                    : 'text-gray-400 hover:text-white hover:bg-gray-800/50'
                 }`}
               >
                 All
               </button>
               <button
                 onClick={() => setFilter('draft')}
-                className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
+                className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all ${
                   filter === 'draft'
-                    ? 'bg-blue-600 text-white shadow-lg shadow-emerald-500/30'
-                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200 border border-gray-200'
+                    ? 'bg-primary text-gray-900 shadow-lg shadow-primary/30'
+                    : 'text-gray-400 hover:text-white hover:bg-gray-800/50'
                 }`}
               >
                 Draft
               </button>
               <button
                 onClick={() => setFilter('sent')}
-                className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
+                className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all ${
                   filter === 'sent'
-                    ? 'bg-blue-600 text-white shadow-lg shadow-emerald-500/30'
-                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200 border border-gray-200'
+                    ? 'bg-primary text-gray-900 shadow-lg shadow-primary/30'
+                    : 'text-gray-400 hover:text-white hover:bg-gray-800/50'
                 }`}
               >
                 Sent
               </button>
               <button
                 onClick={() => setFilter('paid')}
-                className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
+                className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all ${
                   filter === 'paid'
-                    ? 'bg-blue-600 text-white shadow-lg shadow-emerald-500/30'
-                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200 border border-gray-200'
+                    ? 'bg-primary text-gray-900 shadow-lg shadow-primary/30'
+                    : 'text-gray-400 hover:text-white hover:bg-gray-800/50'
                 }`}
               >
                 Paid
               </button>
               <button
                 onClick={() => setFilter('overdue')}
-                className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
+                className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all ${
                   filter === 'overdue'
-                    ? 'bg-blue-600 text-white shadow-lg shadow-emerald-500/30'
-                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200 border border-gray-200'
+                    ? 'bg-primary text-gray-900 shadow-lg shadow-primary/30'
+                    : 'text-gray-400 hover:text-white hover:bg-gray-800/50'
                 }`}
               >
                 Overdue
@@ -196,98 +212,86 @@ export default function InvoicesPage() {
               onAction={filter === 'all' ? undefined : () => setFilter('all')}
             />
           ) : (
-            <div className="bg-gray-800/50 backdrop-blur-xl rounded-2xl shadow-xl border border-gray-700/50 overflow-hidden">
-              {/* Desktop Table */}
-              <div className="hidden md:block overflow-x-auto">
-                <table className="w-full">
-                  <thead className="bg-gray-900/50 border-b border-gray-700/50">
-                    <tr>
-                      <th className="px-6 py-4 text-left text-xs font-semibold text-gray-400 uppercase tracking-wider">
-                        Invoice #
-                      </th>
-                      <th className="px-6 py-4 text-left text-xs font-semibold text-gray-400 uppercase tracking-wider">
-                        Client
-                      </th>
-                      <th className="px-6 py-4 text-left text-xs font-semibold text-gray-400 uppercase tracking-wider">
-                        Issue Date
-                      </th>
-                      <th className="px-6 py-4 text-left text-xs font-semibold text-gray-400 uppercase tracking-wider">
-                        Due Date
-                      </th>
-                      <th className="px-6 py-4 text-left text-xs font-semibold text-gray-400 uppercase tracking-wider">
-                        Amount
-                      </th>
-                      <th className="px-6 py-4 text-left text-xs font-semibold text-gray-400 uppercase tracking-wider">
-                        Status
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y divide-gray-700/50">
-                    {filteredInvoices.map((invoice) => (
-                      <tr key={invoice.id} className="hover:bg-gray-700/30 transition-colors cursor-pointer">
-                        <td className="px-6 py-4 whitespace-nowrap text-sm font-semibold text-white">
-                          {invoice.invoice_number}
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-300">
-                          {invoice.client_name}
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-400">
-                          {formatDate(invoice.issue_date)}
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-400">
-                          {formatDate(invoice.due_date)}
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-white font-bold">
-                          {formatCurrency(invoice.amount)}
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap">
-                          <span
-                            className={`px-3 py-1.5 inline-flex text-xs leading-5 font-semibold rounded-full ${getStatusColor(
-                              invoice.status
-                            )}`}
-                          >
-                            {invoice.status.charAt(0).toUpperCase() + invoice.status.slice(1)}
-                          </span>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
+            <>
+              {/* Desktop Grid View */}
+              <div className="hidden md:grid grid-cols-1 gap-4">
+                {filteredInvoices.map((invoice) => (
+                  <div
+                    key={invoice.id}
+                    className="group backdrop-blur-sm border-2 border-primary/20 hover:border-primary/50 rounded-xl p-6 transition-all hover:shadow-lg hover:shadow-primary/10 cursor-pointer"
+                  >
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-6 flex-1">
+                        <div className="flex flex-col">
+                          <span className="text-xs text-gray-500 uppercase tracking-wider mb-1">Invoice</span>
+                          <span className="text-lg font-bold text-white">{invoice.invoice_number}</span>
+                        </div>
+                        <div className="flex flex-col">
+                          <span className="text-xs text-gray-500 uppercase tracking-wider mb-1">Client</span>
+                          <span className="text-base font-semibold text-gray-300">{invoice.client_name}</span>
+                        </div>
+                        <div className="flex flex-col">
+                          <span className="text-xs text-gray-500 uppercase tracking-wider mb-1">Issue Date</span>
+                          <span className="text-sm text-gray-400">{formatDate(invoice.issue_date)}</span>
+                        </div>
+                        <div className="flex flex-col">
+                          <span className="text-xs text-gray-500 uppercase tracking-wider mb-1">Due Date</span>
+                          <span className="text-sm text-gray-400">{formatDate(invoice.due_date)}</span>
+                        </div>
+                      </div>
+                      <div className="flex items-center gap-6">
+                        <div className="text-right">
+                          <span className="text-xs text-gray-500 uppercase tracking-wider block mb-1">Amount</span>
+                          <span className="text-2xl font-bold text-primary">{formatCurrency(invoice.amount)}</span>
+                        </div>
+                        <span
+                          className={`px-4 py-2 text-sm font-semibold rounded-lg border-2 ${getStatusColor(
+                            invoice.status
+                          )}`}
+                        >
+                          {invoice.status.charAt(0).toUpperCase() + invoice.status.slice(1)}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                ))}
               </div>
 
-              {/* Mobile Cards */}
-              <div className="md:hidden divide-y divide-gray-700/50">
+              {/* Mobile Card View */}
+              <div className="md:hidden grid grid-cols-1 gap-4">
                 {filteredInvoices.map((invoice) => (
-                  <div key={invoice.id} className="p-5 hover:bg-gray-700/30 transition-colors">
-                    <div className="flex justify-between items-start mb-3">
+                  <div
+                    key={invoice.id}
+                    className="backdrop-blur-sm border-2 border-primary/20 hover:border-primary/40 rounded-xl p-5 transition-all"
+                  >
+                    <div className="flex justify-between items-start mb-4">
                       <div>
-                        <p className="text-sm font-semibold text-white">
-                          {invoice.invoice_number}
-                        </p>
-                        <p className="text-sm text-gray-300 mt-1">{invoice.client_name}</p>
+                        <p className="text-sm text-gray-500 uppercase tracking-wider mb-1">Invoice</p>
+                        <p className="text-lg font-bold text-white">{invoice.invoice_number}</p>
+                        <p className="text-sm text-gray-400 mt-1">{invoice.client_name}</p>
                       </div>
                       <span
-                        className={`px-3 py-1 text-xs font-semibold rounded-full ${getStatusColor(
+                        className={`px-3 py-1.5 text-xs font-semibold rounded-lg border-2 ${getStatusColor(
                           invoice.status
                         )}`}
                       >
                         {invoice.status.charAt(0).toUpperCase() + invoice.status.slice(1)}
                       </span>
                     </div>
-                    <div className="flex justify-between items-center mt-4">
+                    <div className="flex justify-between items-end pt-4 border-t border-gray-800">
                       <div>
-                        <p className="text-lg font-bold text-white">
-                          {formatCurrency(invoice.amount)}
-                        </p>
-                        <p className="text-xs text-gray-400 mt-1">
-                          Due: {formatDate(invoice.due_date)}
-                        </p>
+                        <p className="text-xs text-gray-500 mb-1">Due Date</p>
+                        <p className="text-sm text-gray-400">{formatDate(invoice.due_date)}</p>
+                      </div>
+                      <div className="text-right">
+                        <p className="text-xs text-gray-500 mb-1">Amount</p>
+                        <p className="text-2xl font-bold text-primary">{formatCurrency(invoice.amount)}</p>
                       </div>
                     </div>
                   </div>
                 ))}
               </div>
-            </div>
+            </>
           )}
         </main>
       </div>
