@@ -182,21 +182,21 @@ export default function CreateInvoicePage() {
                     <select
                       value={currency}
                       onChange={(e) => setCurrency(e.target.value)}
-                      className="w-full px-4 py-2.5 bg-gray-800 border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent [&>option]:bg-gray-800 [&>option]:text-white [&>option]:py-2"
+                      className="w-full px-4 py-2.5 border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
                     >
-                      <option value="USD" className="bg-gray-800 text-white">USD - US Dollar</option>
-                      <option value="EUR" className="bg-gray-800 text-white">EUR - Euro</option>
-                      <option value="GBP" className="bg-gray-800 text-white">GBP - British Pound</option>
-                      <option value="MWK" className="bg-gray-800 text-white">MWK - Malawian Kwacha</option>
-                      <option value="ZAR" className="bg-gray-800 text-white">ZAR - South African Rand</option>
-                      <option value="KES" className="bg-gray-800 text-white">KES - Kenyan Shilling</option>
-                      <option value="TZS" className="bg-gray-800 text-white">TZS - Tanzanian Shilling</option>
-                      <option value="UGX" className="bg-gray-800 text-white">UGX - Ugandan Shilling</option>
-                      <option value="CAD" className="bg-gray-800 text-white">CAD - Canadian Dollar</option>
-                      <option value="AUD" className="bg-gray-800 text-white">AUD - Australian Dollar</option>
-                      <option value="JPY" className="bg-gray-800 text-white">JPY - Japanese Yen</option>
-                      <option value="CNY" className="bg-gray-800 text-white">CNY - Chinese Yuan</option>
-                      <option value="INR" className="bg-gray-800 text-white">INR - Indian Rupee</option>
+                      <option value="USD">USD - US Dollar</option>
+                      <option value="EUR">EUR - Euro</option>
+                      <option value="GBP">GBP - British Pound</option>
+                      <option value="MWK">MWK - Malawian Kwacha</option>
+                      <option value="ZAR">ZAR - South African Rand</option>
+                      <option value="KES">KES - Kenyan Shilling</option>
+                      <option value="TZS">TZS - Tanzanian Shilling</option>
+                      <option value="UGX">UGX - Ugandan Shilling</option>
+                      <option value="CAD">CAD - Canadian Dollar</option>
+                      <option value="AUD">AUD - Australian Dollar</option>
+                      <option value="JPY">JPY - Japanese Yen</option>
+                      <option value="CNY">CNY - Chinese Yuan</option>
+                      <option value="INR">INR - Indian Rupee</option>
                     </select>
                   </div>
                 </div>
