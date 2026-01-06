@@ -32,7 +32,7 @@ export default function Home() {
   }
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gray-50 px-4 sm:px-6 py-12 sm:py-16">
+    <div className="flex min-h-screen items-center justify-center bg-gray-50 px-4 sm:px-6 py-12 sm:py-16 pt-24 sm:pt-32">
       <div className="max-w-3xl w-full text-center">
         
         <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-gray-900 mb-4 px-2">
