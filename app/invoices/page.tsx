@@ -111,9 +111,12 @@ export default function InvoicesPage() {
                 </Link>
                 <h1 className="text-xl sm:text-2xl font-bold text-white">Invoices</h1>
               </div>
-              <button className="px-4 sm:px-6 py-2.5 text-xs sm:text-sm font-semibold bg-gradient-to-r from-green-400 to-emerald-600 text-white rounded-full hover:from-green-500 hover:to-emerald-700 shadow-lg shadow-green-500/30 transition-all hover:-translate-y-0.5 active:scale-95">
+              <Link
+                href="/invoices/create"
+                className="px-4 sm:px-6 py-2.5 text-xs sm:text-sm font-semibold bg-gradient-to-r from-green-400 to-emerald-600 text-white rounded-full hover:from-green-500 hover:to-emerald-700 shadow-lg shadow-green-500/30 transition-all hover:-translate-y-0.5 active:scale-95"
+              >
                 + New Invoice
-              </button>
+              </Link>
             </div>
           </div>
         </header>
