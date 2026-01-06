@@ -144,7 +144,7 @@ export default function CreateInvoicePage() {
             <div className="space-y-6">
               
               {/* Invoice Details Card */}
-              <div className="bg-gray-900/40 backdrop-blur-sm border border-gray-800 rounded-xl p-6">
+              <div className="backdrop-blur-sm border border-gray-800 rounded-xl p-6">
                 <h2 className="text-lg font-semibold text-white mb-4">Invoice Details</h2>
                 <div className="space-y-4">
                   <div className="grid grid-cols-2 gap-4">
@@ -183,7 +183,7 @@ export default function CreateInvoicePage() {
               </div>
 
               {/* Client Information Card */}
-              <div className="bg-gray-900/40 backdrop-blur-sm border border-gray-800 rounded-xl p-6">
+              <div className="backdrop-blur-sm border border-gray-800 rounded-xl p-6">
                 <h2 className="text-lg font-semibold text-white mb-4">Client Information</h2>
                 <div className="space-y-4">
                   <div>
@@ -212,7 +212,7 @@ export default function CreateInvoicePage() {
               </div>
 
               {/* Items Card */}
-              <div className="bg-gray-900/40 backdrop-blur-sm border border-gray-800 rounded-xl p-6">
+              <div className="backdrop-blur-sm border border-gray-800 rounded-xl p-6">
                 <div className="flex justify-between items-center mb-4">
                   <h2 className="text-lg font-semibold text-white">Items / Services</h2>
                   <button
@@ -277,7 +277,7 @@ export default function CreateInvoicePage() {
               </div>
 
               {/* Additional Options Card */}
-              <div className="bg-gray-900/40 backdrop-blur-sm border border-gray-800 rounded-xl p-6">
+              <div className="backdrop-blur-sm border border-gray-800 rounded-xl p-6">
                 <h2 className="text-lg font-semibold text-white mb-4">Additional Options</h2>
                 <div className="grid grid-cols-2 gap-4 mb-4">
                   <div>
@@ -320,7 +320,7 @@ export default function CreateInvoicePage() {
 
             {/* Right Panel - Preview */}
             <div className="lg:sticky lg:top-24 h-fit">
-              <div className="bg-gray-900/40 backdrop-blur-sm border border-gray-800 rounded-xl p-8">
+              <div className="backdrop-blur-sm border border-gray-800 rounded-xl p-8">
                 <div className="flex justify-between items-start mb-8">
                   <div>
                     <h3 className="text-2xl font-display font-bold">
