@@ -10,7 +10,7 @@ interface AuthContextType {
   user: User | null;
   isLoading: boolean;
   isAuthenticated: boolean;
-  login: (credentials: LoginRequest) => Promise<void>;
+  login: (credentials: LoginRequest) => Promise<User>;
   register: (data: RegisterRequest) => Promise<void>;
   logout: () => void;
   refreshUser: () => Promise<void>;
@@ -45,13 +45,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     initAuth();
   }, []);
 
-  const login = async (credentials: LoginRequest): Promise<void> => {
+  const login = async (credentials: LoginRequest): Promise<User> => {
     const response = await apiClient.post<LoginResponse>('/auth/login', credentials, {
       skipAuth: true,
     });
 
     apiClient.setToken(response.accessToken);
     setUser(response.user);
+    return response.user;
   };
 
   const register = async (data: RegisterRequest): Promise<void> => {

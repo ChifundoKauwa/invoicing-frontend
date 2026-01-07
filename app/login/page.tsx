@@ -13,7 +13,7 @@ import type { ApiError } from '@/app/lib/api-client';
 
 export default function LoginPage() {
   const router = useRouter();
-  const { login, isAuthenticated } = useAuth();
+  const { login, isAuthenticated, user } = useAuth();
   
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -21,8 +21,12 @@ export default function LoginPage() {
   const [isLoading, setIsLoading] = useState(false);
 
   // Redirect if already authenticated
-  if (isAuthenticated) {
-    router.push('/dashboard');
+  if (isAuthenticated && user) {
+    if (user.role === 'admin' || user.role === 'manager') {
+      router.push('/admin');
+    } else {
+      router.push('/dashboard');
+    }
     return null;
   }
 
@@ -32,8 +36,13 @@ export default function LoginPage() {
     setIsLoading(true);
 
     try {
-      await login({ email, password });
-      router.push('/dashboard');
+      const userData = await login({ email, password });
+      // Redirect admin and manager users to admin dashboard
+      if (userData?.role === 'admin' || userData?.role === 'manager') {
+        router.push('/admin');
+      } else {
+        router.push('/dashboard');
+      }
     } catch (err) {
       const apiError = err as ApiError;
       setError(apiError.message || 'Login failed. Please try again.');
@@ -43,10 +52,10 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gray-50 px-4 py-8 pt-24">
+    <div className="flex min-h-screen items-center justify-center bg-gray-50 px-4">
       <div className="w-full max-w-md">
-        <div className="bg-white rounded-lg shadow-md p-6 sm:p-8">
-          <h1 className="text-xl sm:text-2xl font-bold text-gray-900 mb-6">Sign In</h1>
+        <div className="bg-white rounded-lg shadow-md p-8">
+          <h1 className="text-2xl font-bold text-gray-900 mb-6">Sign In</h1>
           
           {error && (
             <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded text-red-700 text-sm">
@@ -65,14 +74,15 @@ export default function LoginPage() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
-                className="w-full px-3 py-2.5 sm:py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-black text-base"
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-black"
                 placeholder="you@example.com"
                 disabled={isLoading}
               />
             </div>
 
             <div>
-              <label htmlFor="password" className="block text-sm font-medium text-black mb-1">
+              <label htmlFor="password" className="block text-sm font-medium text-black
+               mb-1">
                 Password
               </label>
               <input
@@ -81,7 +91,7 @@ export default function LoginPage() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
-                className="w-full px-3 py-2.5 sm:py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-black text-base"
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-black"
                 placeholder="••••••••"
                 disabled={isLoading}
               />
@@ -90,7 +100,7 @@ export default function LoginPage() {
             <button
               type="submit"
               disabled={isLoading}
-              className="w-full bg-blue-600 text-white py-2.5 sm:py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors active:scale-[0.98]"
+              className="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
             >
               {isLoading ? 'Signing in...' : 'Sign In'}
             </button>
