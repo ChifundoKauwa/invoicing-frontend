@@ -54,3 +54,43 @@ export interface InvoiceListResponse {
   page: number;
   per_page: number;
 }
+
+// Admin-specific types
+export interface UserWithInvoices extends User {
+  invoiceCount?: number;
+  totalRevenue?: number;
+  lastActive?: string;
+}
+
+export interface UsersListResponse {
+  users: UserWithInvoices[];
+  total: number;
+  page?: number;
+  per_page?: number;
+}
+
+export interface UpdateUserRoleRequest {
+  userId: string;
+  role: 'user' | 'manager' | 'admin';
+}
+
+export interface UpdateUserRoleResponse {
+  user: User;
+  message: string;
+}
+
+export interface SystemStats {
+  totalUsers: number;
+  totalInvoices: number;
+  totalRevenue: number;
+  activeUsers: number;
+  pendingInvoices: number;
+  paidInvoices: number;
+  overdueInvoices: number;
+}
+
+export interface AdminInvoiceWithUser extends Invoice {
+  user_id?: string;
+  user_email?: string;
+  user_name?: string;
+}
