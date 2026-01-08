@@ -34,9 +34,50 @@ export interface RegisterResponse {
   user: User;
 }
 
+// Client types
+export enum ClientStatus {
+  Active = 'active',
+  Inactive = 'inactive',
+  Archived = 'archived'
+}
+
+export interface Client {
+  id: string;
+  name: string;
+  email: string;
+  phone?: string;
+  address?: string;
+  status: ClientStatus;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface CreateClientRequest {
+  name: string;
+  email: string;
+  phone?: string;
+  address?: string;
+}
+
+export interface UpdateClientRequest {
+  name?: string;
+  email?: string;
+  phone?: string;
+  address?: string;
+  status?: ClientStatus;
+}
+
+export interface ClientListResponse {
+  clients: Client[];
+  total: number;
+  page?: number;
+  per_page?: number;
+}
+
 export interface Invoice {
   id: string;
   invoice_number: string;
+  client_id: string;
   client_name: string;
   client_email?: string;
   amount: number;
@@ -46,6 +87,16 @@ export interface Invoice {
   due_date: string;
   created_at: string;
   updated_at: string;
+  client?: Client;
+}
+
+export interface CreateInvoiceRequest {
+  clientId: string;
+  amount: number;
+  currency?: string;
+  status?: 'draft' | 'sent' | 'paid' | 'overdue';
+  issue_date: string;
+  due_date: string;
 }
 
 export interface InvoiceListResponse {
