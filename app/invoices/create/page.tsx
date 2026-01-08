@@ -420,8 +420,12 @@ export default function CreateInvoicePage() {
                 <div className="grid grid-cols-2 gap-6 mb-8 pb-8 border-b border-gray-800">
                   <div>
                     <p className="text-xs text-gray-500 uppercase tracking-wider mb-2">Billed To</p>
-                    <p className="text-white font-semibold">{clientName || 'Client Name'}</p>
-                    <p className="text-sm text-gray-400">{clientEmail || 'client@example.com'}</p>
+                    <p className="text-white font-semibold">
+                      {selectedClientId ? clients.find(c => c.id === selectedClientId)?.name : 'Select a client'}
+                    </p>
+                    <p className="text-sm text-gray-400">
+                      {selectedClientId ? clients.find(c => c.id === selectedClientId)?.email : 'client@example.com'}
+                    </p>
                   </div>
                   <div className="text-right">
                     <p className="text-xs text-gray-500 uppercase tracking-wider mb-2">Date</p>
