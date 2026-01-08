@@ -1,10 +1,12 @@
 'use client';
 
-import { useState, FormEvent } from 'react';
+import { useState, FormEvent, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import ProtectedRoute from '@/app/components/protected-route';
 import apiClient from '@/app/lib/api-client';
+import { clientApi } from '@/app/lib/client-api';
+import type { Client } from '@/app/lib/types';
 
 interface InvoiceItem {
   id: string;
@@ -17,11 +19,12 @@ export default function CreateInvoicePage() {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
+  const [clients, setClients] = useState<Client[]>([]);
+  const [loadingClients, setLoadingClients] = useState(true);
 
   // Invoice form state
   const [invoiceNumber, setInvoiceNumber] = useState(`INV-${Date.now()}`);
-  const [clientName, setClientName] = useState('');
-  const [clientEmail, setClientEmail] = useState('');
+  const [selectedClientId, setSelectedClientId] = useState('');
   const [issueDate, setIssueDate] = useState(new Date().toISOString().split('T')[0]);
   const [dueDate, setDueDate] = useState('');
   const [currency, setCurrency] = useState('USD');
@@ -31,6 +34,23 @@ export default function CreateInvoicePage() {
   const [taxRate, setTaxRate] = useState(0);
   const [discount, setDiscount] = useState(0);
   const [notes, setNotes] = useState('');
+
+  // Load clients on mount
+  useEffect(() => {
+    loadClients();
+  }, []);
+
+  const loadClients = async () => {
+    try {
+      setLoadingClients(true);
+      const response = await clientApi.getClients();
+      setClients(response.clients.filter(c => c.status === 'active'));
+    } catch (err: any) {
+      setError(err.message || 'Failed to load clients');
+    } finally {
+      setLoadingClients(false);
+    }
+  };
 
   // Calculations
   const subtotal = items.reduce((sum, item) => sum + (item.quantity * item.unit_price), 0);
@@ -57,13 +77,17 @@ export default function CreateInvoicePage() {
   const handleSubmit = async (e: FormEvent, status: 'draft' | 'sent') => {
     e.preventDefault();
     setError('');
+
+    if (!selectedClientId) {
+      setError('Please select a client');
+      return;
+    }
+
     setIsLoading(true);
 
     try {
       await apiClient.post('/invoices', {
-        invoice_number: invoiceNumber,
-        client_name: clientName,
-        client_email: clientEmail,
+        clientId: selectedClientId,
         amount: total,
         status,
         issue_date: issueDate,
@@ -205,30 +229,67 @@ export default function CreateInvoicePage() {
 
               {/* Client Information Card */}
               <div className="backdrop-blur-sm border-2 border-primary/20 hover:border-primary/40 rounded-xl p-6 transition-all">
-                <h2 className="text-lg font-semibold text-white mb-4">Client Information</h2>
+                <div className="flex justify-between items-center mb-4">
+                  <h2 className="text-lg font-semibold text-white">Client Information</h2>
+                  <Link
+                    href="/clients/create"
+                    className="text-primary hover:text-primary-accent text-sm font-semibold flex items-center gap-1"
+                  >
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+                    </svg>
+                    New Client
+                  </Link>
+                </div>
                 <div className="space-y-4">
-                  <div>
-                    <label className="block text-sm font-medium text-gray-400 mb-2">Client Name</label>
-                    <input
-                      type="text"
-                      value={clientName}
-                      onChange={(e) => setClientName(e.target.value)}
-                      className="w-full px-4 py-2.5 bg-gray-800/50 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
-                      placeholder="Enter client name"
-                      required
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-gray-400 mb-2">Client Email</label>
-                    <input
-                      type="email"
-                      value={clientEmail}
-                      onChange={(e) => setClientEmail(e.target.value)}
-                      className="w-full px-4 py-2.5 bg-gray-800/50 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
-                      placeholder="client@example.com"
-                      required
-                    />
-                  </div>
+                  {loadingClients ? (
+                    <div className="text-gray-400 text-sm">Loading clients...</div>
+                  ) : clients.length === 0 ? (
+                    <div className="text-center py-4">
+                      <p className="text-gray-400 text-sm mb-3">No active clients found</p>
+                      <Link
+                        href="/clients/create"
+                        className="text-primary hover:text-primary-accent text-sm font-semibold"
+                      >
+                        Create your first client
+                      </Link>
+                    </div>
+                  ) : (
+                    <div>
+                      <label className="block text-sm font-medium text-gray-400 mb-2">
+                        Select Client <span className="text-red-400">*</span>
+                      </label>
+                      <select
+                        value={selectedClientId}
+                        onChange={(e) => setSelectedClientId(e.target.value)}
+                        className="w-full px-4 py-2.5 bg-gray-800/90 border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent appearance-none cursor-pointer"
+                        style={{ colorScheme: 'dark' }}
+                        required
+                      >
+                        <option value="">Choose a client...</option>
+                        {clients.map((client) => (
+                          <option key={client.id} value={client.id}>
+                            {client.name} ({client.email})
+                          </option>
+                        ))}
+                      </select>
+                      {selectedClientId && (
+                        <div className="mt-3 p-3 bg-gray-800/30 rounded-lg border border-gray-700">
+                          {(() => {
+                            const client = clients.find(c => c.id === selectedClientId);
+                            return client ? (
+                              <div className="text-sm space-y-1">
+                                <p className="text-white font-medium">{client.name}</p>
+                                <p className="text-gray-400">{client.email}</p>
+                                {client.phone && <p className="text-gray-400">{client.phone}</p>}
+                                {client.address && <p className="text-gray-400">{client.address}</p>}
+                              </div>
+                            ) : null;
+                          })()}
+                        </div>
+                      )}
+                    </div>
+                  )}
                 </div>
               </div>
 
