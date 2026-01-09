@@ -90,13 +90,16 @@ export interface Invoice {
   client?: Client;
 }
 
+export interface InvoiceItem {
+  description: string;
+  quantity: number;
+  unit_price: number;
+}
+
 export interface CreateInvoiceRequest {
   clientId: string;
-  amount: number;
   currency?: string;
-  status?: 'draft' | 'sent' | 'paid' | 'overdue';
-  issue_date: string;
-  due_date: string;
+  items: InvoiceItem[];
 }
 
 export interface InvoiceListResponse {
