@@ -12,7 +12,7 @@ interface InvoiceItem {
   id: string;
   description: string;
   quantity: number;
-  unit_price: number;
+  unitPriceAmount: number;
 }
 
 export default function CreateInvoicePage() {
@@ -26,7 +26,7 @@ export default function CreateInvoicePage() {
   const [selectedClientId, setSelectedClientId] = useState('');
   const [currency, setCurrency] = useState('USD');
   const [items, setItems] = useState<InvoiceItem[]>([
-    { id: '1', description: '', quantity: 1, unit_price: 0 }
+    { id: '1', description: '', quantity: 1, unitPriceAmount: 0 }
   ]);
 
   // Load clients on mount
@@ -47,10 +47,10 @@ export default function CreateInvoicePage() {
   };
 
   // Calculations
-  const total = items.reduce((sum, item) => sum + (item.quantity * item.unit_price), 0);
+  const total = items.reduce((sum, item) => sum + (item.quantity * item.unitPriceAmount), 0);
 
   const addItem = () => {
-    setItems([...items, { id: Date.now().toString(), description: '', quantity: 1, unit_price: 0 }]);
+    setItems([...items, { id: Date.now().toString(), description: '', quantity: 1, unitPriceAmount: 0 }]);
   };
 
   const removeItem = (id: string) => {
@@ -82,8 +82,8 @@ export default function CreateInvoicePage() {
         currency: currency,
         items: items.map(item => ({
           description: item.description,
-          quantity: item.quantity,
-          unit_price: item.unit_price
+          quantity: Number(item.quantity),
+          unitPriceAmount: Number(item.unitPriceAmount)
         }))
       });
       // Backend now generates the invoice number - display success message or redirect
@@ -298,8 +298,8 @@ export default function CreateInvoicePage() {
                           />
                           <input
                             type="number"
-                            value={item.unit_price}
-                            onChange={(e) => updateItem(item.id, 'unit_price', parseFloat(e.target.value) || 0)}
+                            value={item.unitPriceAmount}
+                            onChange={(e) => updateItem(item.id, 'unitPriceAmount', parseFloat(e.target.value) || 0)}
                             className="w-full px-4 py-2.5 bg-gray-800/50 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
                             placeholder="Price"
                             min="0"
@@ -371,9 +371,9 @@ export default function CreateInvoicePage() {
                           <tr key={item.id}>
                             <td className="py-3 text-sm text-gray-300">{item.description || 'Item description'}</td>
                             <td className="py-3 text-sm text-gray-300 text-right">{item.quantity}</td>
-                            <td className="py-3 text-sm text-gray-300 text-right">{formatCurrency(item.unit_price)}</td>
+                            <td className="py-3 text-sm text-gray-300 text-right">{formatCurrency(item.unitPriceAmount)}</td>
                             <td className="py-3 text-sm text-white font-semibold text-right">
-                              {formatCurrency(item.quantity * item.unit_price)}
+                              {formatCurrency(item.quantity * item.unitPriceAmount)}
                             </td>
                           </tr>
                         ))}

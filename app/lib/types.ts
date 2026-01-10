@@ -93,7 +93,7 @@ export interface Invoice {
 export interface InvoiceItem {
   description: string;
   quantity: number;
-  unit_price: number;
+  unitPriceAmount: number;
 }
 
 export interface CreateInvoiceRequest {
