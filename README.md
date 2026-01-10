@@ -267,6 +267,4 @@ Recommended enhancements:
 9. Add refresh token flow
 10. Implement proper error boundary
 
-## License
 
-[Your License]
