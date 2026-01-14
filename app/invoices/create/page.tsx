@@ -40,7 +40,8 @@ export default function CreateInvoicePage() {
       const response = await clientApi.getClients();
       setClients(response.clients.filter(c => c.status === 'active'));
     } catch (err: any) {
-      setError(err.message || 'Failed to load clients');
+      const errorMessage = err?.message || err?.error || (typeof err === 'string' ? err : 'Failed to load clients');
+      setError(errorMessage);
     } finally {
       setLoadingClients(false);
     }
@@ -89,7 +90,8 @@ export default function CreateInvoicePage() {
       // Backend now generates the invoice number - display success message or redirect
       router.push('/invoices');
     } catch (err: any) {
-      setError(err?.message || 'Failed to create invoice');
+      const errorMessage = err?.message || err?.error || (typeof err === 'string' ? err : 'Failed to create invoice');
+      setError(errorMessage);
     } finally {
       setIsLoading(false);
     }
