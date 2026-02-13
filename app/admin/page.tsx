@@ -85,7 +85,7 @@ export default function AdminDashboardPage() {
 
   return (
     <AdminRoute>
-      <div className="min-h-screen bg-gradient-to-br from-gray-900 via-black to-green-900">
+      <div className="min-h-screen bg-gray-50">
         {/* Sidebar - Desktop */}
         <aside className="hidden md:fixed md:inset-y-0 md:flex md:w-64 md:flex-col">
           <div className="flex flex-col flex-grow bg-black/40 backdrop-blur-xl border-r border-green-500/20 overflow-y-auto">
